@@ -87,17 +87,37 @@ Extra Cost = 5
 Extra Path = 4
 Extra Node = 1
 Path:
-S1 --(00/1)--> N1 (extra, new node)
+S3 --(00/1)--> N1 (extra, new node)
 N1 --(01/0)--> N1 (extra)
 N1 --(01/0)--> N1
 N1 --(10/1)--> S0 (extra)
 S0 --(10/0)--> S2
 S2 --(00/1)--> S3
-S3 --(11/0)--> S3 (extra)
-S3 --(11/0)--> S3
-```
-This output indicates that the minimum extra cost to process the input string is 5, achieved by adding 4 extra transitions and an extra node.
+S3 --(11/0)--> S0 (extra)
+S0 --(11/0)--> S1
 
+
+------------------------------
+Testing case 2:
+111_010_000_100_110_101_110_000
+
+Extra Cost = 4
+Extra Path = 4
+Extra Node = 0
+Path:
+S3 --(11/1)--> S2 (extra)
+S2 --(01/0)--> S1 (extra)
+S1 --(00/0)--> S0 (extra)
+S0 --(10/0)--> S2
+S2 --(11/0)--> S1
+S1 --(10/1)--> S2 (extra)
+S2 --(11/0)--> S1
+S1 --(00/0)--> S0
+```
+This output indicates that:
+* For the first string, the minimum extra cost to process is `5`, achieved by adding `4` extra transitions and `1` extra node.
+* For the second string, the minimum extra cost to process is `4`, achieved by adding `4` extra transitions and no extra node.
+  
 ## Code Structure
 - `DEFINED_TRANSITIONS`: Contains the predefined transitions for nodes `S0`, `S1`, `S2`, and `S3`.
 
