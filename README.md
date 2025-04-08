@@ -2,16 +2,17 @@
 
 This project provides a Python solution for finding a path through a directed graph given a binary string input. Each three-bit segment of the string represents a transition: the first two bits are an input, and the third bit is the required output. The goal is to traverse the graph such that every two-bit input produces the specified one-bit output, while minimizing any additional modifications to the graph.
 
-![image](https://github.com/user-attachments/assets/f2b0b893-1b6e-4193-9084-f9c88243b8de)
 
 ## Problem Overview
+![image](https://github.com/user-attachments/assets/f2b0b893-1b6e-4193-9084-f9c88243b8de)
 
 We are given a set of nodes with pre-defined one-way transition paths. Each transition is defined by a two-bit input and produces a one-bit output. For example, one of the nodes is defined as:
 
 - **S0**:
   - `01`: goes to **S1** with output `1`
-  - `11`: goes to **S1** with output `0`
   - `10`: goes to **S2** with output `0`
+  - `11`: goes to **S1** with output `0`
+
 
 The problem allows you to:
 1. Create an **extra transition** if the required input does not exist or produces the wrong output.
@@ -59,7 +60,7 @@ The code includes a test example. You can change the list by modifying the test_
 
 #### Example node-and-path declaration
 ```python3
-# Pre-defined transitions for the 4 given nodes.
+# Pre-defined transitions for the given nodes.
 # Format: node: { two-bit input : (destination, output) }
 DEFINED_TRANSITIONS = {
     'S0': {'01': ('S1', '1'), '11': ('S1', '0'), '10': ('S2', '0')},
@@ -118,7 +119,7 @@ This output indicates that:
 * For the first string, the minimum extra cost to process is `5`, achieved by adding `4` extra transitions and `1` extra node.
 * For the second string, the minimum extra cost to process is `4`, achieved by adding `4` extra transitions and no extra node.
   
-## Code Structure
+### Code Structure
 - `DEFINED_TRANSITIONS`: Contains the predefined transitions for nodes `S0`, `S1`, `S2`, and `S3`.
 
 - `dfs` Function: Implements the DFS with memoization, tracking state parameters such as the current step, current node, extra transitions, and the new node count.
@@ -127,8 +128,19 @@ This output indicates that:
 
 - `__main__` Block: Entry point for testing the algorithm with a sample binary string.
 
-## License 
-This project is provided "as is" without any warranty. You are free to use it for educational or personal purposes.
+## ✅ To-do
+
+- **Support multi-solution output:**  
+  The current DFS fails to return *all* valid paths with minimum cost.
+
+- **Parallel exploration (for large strings):**  
+  Integrate multiprocessing or async support to explore DFS branches concurrently, improving performance for long inputs.
+
+- **Unit tests & regression tests:**  
+  Add a test suite (e.g., using `unittest` or `pytest`) to validate:
+  - Path correctness.
+  - Cost optimality.
+  - Multi-solution completeness.
 
 ## Author
 Tang, You-Zeng. (Email: christang426849@gmail.com)
